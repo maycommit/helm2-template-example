@@ -11,13 +11,13 @@ import (
 )
 
 func main() {
-	loadedChart, err := chartutil.LoadDir("./chart")
+	loadedChart, err := chartutil.LoadDir("./path-chart")
 	if err != nil {
 		log.Fatal("CHART:", err)
 		return
 	}
 
-	loadedValueStr, err := ioutil.ReadFile("./chart/darwin-application.yaml")
+	loadedValueStr, err := ioutil.ReadFile("override-value.yaml")
 	if err != nil {
 		log.Fatal("VALUES: ", err)
 		return
@@ -42,7 +42,7 @@ func main() {
 	}
 
 	yamlData := make(map[interface{}]interface{})
-	deplpymentYAMLStr := tmpRender["darwin-k8s-chart-values/templates/deployment.yaml"]
+	deplpymentYAMLStr := tmpRender["chartname/templates/template.yaml"]
 	err = yaml.Unmarshal([]byte(deplpymentYAMLStr), &yamlData)
 	if err != nil {
 		log.Fatal("YAML_UNMARSHALL: ", err)
